@@ -28,10 +28,11 @@ interface Client
 
     /**
      * @param string $filename
+     * @param string $version
      *
      * @return ResponseInterface
      */
-    public function get($filename);
+    public function get($filename, $version = '');
 
     /**
      * @param string $filename
