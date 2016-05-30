@@ -1,0 +1,29 @@
+{
+    "name": "livetyping/hermitage-php-client",
+    "type": "library",
+    "description": "Client for Hermitage servers",
+    "keywords": ["hermitage", "client", "images"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivan Kudinov",
+            "email": "i.kudinov@frostealth.ru",
+            "homepage": "http://frostealth.ru"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "psr/http-message": "~1.0",
+        "guzzlehttp/guzzle": "~6.2"
+    },
+    "require-dev": {
+        "phpro/grumphp": "~0.9",
+        "squizlabs/php_codesniffer": "~2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "livetyping\\hermitage\\client\\": "src/"
+        },
+        "files": ["src/functions.php"]
+    }
+}
