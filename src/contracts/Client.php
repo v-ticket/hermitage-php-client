@@ -13,11 +13,11 @@ use Psr\Http\Message\UriInterface;
 interface Client
 {
     /**
-     * @param string $binary
-     *
+     * @param $binary
+     * @param string $extension
      * @return ResponseInterface
      */
-    public function upload($binary);
+    public function upload($binary,  $extension = '');
 
     /**
      * @param string $filename
