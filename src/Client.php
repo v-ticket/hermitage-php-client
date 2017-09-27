@@ -34,8 +34,8 @@ class Client implements ClientInterface
      * Client constructor.
      *
      * @param \livetyping\hermitage\client\contracts\signer\RequestSigner $signer
-     * @param \GuzzleHttp\ClientInterface                                 $guzzle
-     * @param \Psr\Http\Message\UriInterface|string                       $baseUri
+     * @param \GuzzleHttp\ClientInterface $guzzle
+     * @param \Psr\Http\Message\UriInterface|string $baseUri
      */
     public function __construct(RequestSigner $signer, GuzzleClientInterface $guzzle, $baseUri)
     {
@@ -59,13 +59,17 @@ class Client implements ClientInterface
 
     /**
      * @param string $binary
-     *
+     * @param string $extension
      * @return \Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function upload($binary)
+    public function upload($binary, $extension = '')
     {
         $request = new Request('POST', $this->baseUri, $this->headers, $binary);
         $request = $request->withHeader('Content-Type', mimetype_from_binary($binary));
+        if ($extension) {
+            $request->withHeader('extension', $extension);
+        }
         $request = $this->signer->sign($request);
 
         return $this->guzzle->send($request);
