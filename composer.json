@@ -1,5 +1,5 @@
 {
-    "name": "livetyping/hermitage-php-client",
+    "name": "v-ticket/hermitage-php-client",
     "type": "library",
     "description": "Client for Hermitage servers",
     "keywords": ["hermitage", "client", "images"],
