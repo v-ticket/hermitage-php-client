@@ -12,27 +12,26 @@ use Psr\Http\Message\UriInterface;
  */
 interface Client
 {
-    /**
-     * @param $binary
-     * @param string $extension
-     * @return ResponseInterface
-     */
-    public function upload($binary,  $extension = '');
-
-    /**
-     * @param string $filename
-     *
-     * @return ResponseInterface
-     */
-    public function delete($filename);
 
     /**
      * @param string $filename
      * @param string $version
-     *
      * @return ResponseInterface
      */
     public function get($filename, $version = '');
+
+    /**
+     * @param string $binary
+     * @param string $extension
+     * @return ResponseInterface
+     */
+    public function upload($binary, $extension = null);
+
+    /**
+     * @param string $filename
+     * @return ResponseInterface
+     */
+    public function delete($filename);
 
     /**
      * @param string $filename
