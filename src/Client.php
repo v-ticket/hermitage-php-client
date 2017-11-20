@@ -76,7 +76,7 @@ class Client implements ClientInterface
         $request = new Request('POST', $this->baseUri, $this->headers, $binary);
         $request = $request->withHeader('Content-Type', mimetype_from_binary($binary));
         if (null !== $extension) {
-            $request->withHeader('extension', $extension);
+            $request = $request->withHeader('extension', $extension);
         }
         $request = $this->signer->sign($request);
 
