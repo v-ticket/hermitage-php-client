@@ -1,5 +1,6 @@
 {
     "name": "v-ticket/hermitage-php-client",
+    "version": "0.1.2",
     "type": "library",
     "description": "Client for Hermitage servers",
     "keywords": ["hermitage", "client", "images"],

@@ -16,16 +16,24 @@ use Psr\Http\Message\UriInterface;
  */
 class Client implements ClientInterface
 {
-    /** @var \livetyping\hermitage\client\contracts\signer\RequestSigner */
+    /**
+     * @var RequestSigner
+     */
     protected $signer;
 
-    /** @var \GuzzleHttp\ClientInterface */
+    /**
+     * @var GuzzleClientInterface
+     */
     protected $guzzle;
 
-    /** @var UriInterface */
+    /**
+     * @var UriInterface
+     */
     protected $baseUri;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     protected $headers = [
         'Accept' => 'application/json',
     ];
@@ -33,9 +41,9 @@ class Client implements ClientInterface
     /**
      * Client constructor.
      *
-     * @param \livetyping\hermitage\client\contracts\signer\RequestSigner $signer
-     * @param \GuzzleHttp\ClientInterface $guzzle
-     * @param \Psr\Http\Message\UriInterface|string $baseUri
+     * @param RequestSigner $signer
+     * @param GuzzleClientInterface $guzzle
+     * @param UriInterface|string $baseUri
      */
     public function __construct(RequestSigner $signer, GuzzleClientInterface $guzzle, $baseUri)
     {
@@ -47,8 +55,8 @@ class Client implements ClientInterface
     /**
      * @param string $filename
      * @param string $version
-     *
      * @return \Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function get($filename, $version = '')
     {
@@ -63,11 +71,11 @@ class Client implements ClientInterface
      * @return \Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function upload($binary, $extension = '')
+    public function upload($binary, $extension = null)
     {
         $request = new Request('POST', $this->baseUri, $this->headers, $binary);
         $request = $request->withHeader('Content-Type', mimetype_from_binary($binary));
-        if ($extension) {
+        if (null !== $extension) {
             $request->withHeader('extension', $extension);
         }
         $request = $this->signer->sign($request);
@@ -77,8 +85,8 @@ class Client implements ClientInterface
 
     /**
      * @param string $filename
-     *
      * @return \Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function delete($filename)
     {
